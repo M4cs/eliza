@@ -247,11 +247,15 @@ export const models: Models = {
             presence_penalty: 0.0,
             temperature: 0.6,
         },
+        imageSettings: {
+            steps: 20,
+        },
         model: {
             [ModelClass.SMALL]: "llama8b",
             [ModelClass.MEDIUM]: "llama8b",
             [ModelClass.LARGE]: "llama8b",
             [ModelClass.EMBEDDING]: "text-embedding-3-small",
+            [ModelClass.IMAGE]: "fluxDev",
         },
     },
 };

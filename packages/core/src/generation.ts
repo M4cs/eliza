@@ -1,7 +1,7 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { createGroq } from "@ai-sdk/groq";
 import { createOpenAI } from "@ai-sdk/openai";
-import { getModel } from "./models.ts";
+import { getEndpoint, getModel } from "./models.ts";
 import {
     generateText as aiGenerateText,
     generateObject as aiGenerateObject,
@@ -852,7 +852,20 @@ export const generateImage = async (
             ) {
                 targetSize = "1024x1024";
             }
-            const openai = new OpenAI({ apiKey: apiKey as string });
+            let openai: OpenAI;
+            if (runtime.character.modelProvider === ModelProviderName.OPENAI) {
+                openai = new OpenAI({ apiKey: apiKey as string });
+            } else if (
+                runtime.character.modelProvider === ModelProviderName.OASIS
+            ) {
+                openai = new OpenAI({
+                    apiKey: apiKey as string,
+                    baseURL: getEndpoint(runtime.character.modelProvider),
+                    defaultHeaders: {
+                        Authorization: apiKey,
+                    },
+                });
+            }
             const response = await openai.images.generate({
                 model,
                 prompt,

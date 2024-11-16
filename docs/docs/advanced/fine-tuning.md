@@ -25,6 +25,7 @@ enum ModelProviderName {
   REDPILL,
   OPENROUTER,
   HEURIST,
+  OASIS,
 }
 ```
 
