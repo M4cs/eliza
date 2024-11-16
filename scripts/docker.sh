@@ -37,6 +37,7 @@ case "$1" in
             -v "$(pwd)/packages/client-discord/src:/app/packages/client-discord/src" \
             -v "$(pwd)/packages/client-telegram/src:/app/packages/client-telegram/src" \
             -v "$(pwd)/packages/client-twitter/src:/app/packages/client-twitter/src" \
+            -v "$(pwd)/packages/client-bluesky/src:/app/packages/client-bluesky/src" \
             -v "$(pwd)/packages/core/src:/app/packages/core/src" \
             -v "$(pwd)/packages/core/types:/app/packages/core/types" \
             -v "$(pwd)/packages/plugin-bootstrap/src:/app/packages/plugin-bootstrap/src" \
