@@ -355,6 +355,37 @@ export async function generateText({
                 break;
             }
 
+            case ModelProviderName.OASIS: {
+                elizaLogger.debug("Initializing Oasis model.");
+                elizaLogger.log("apiKey", apiKey);
+                elizaLogger.log("endpoint", endpoint);
+                const openai = createOpenAI({
+                    apiKey,
+                    baseURL: endpoint,
+                    headers: {
+                        Authorization: `api-key ${apiKey}`,
+                    },
+                    compatibility: "compatible",
+                });
+
+                const { text: openaiResponse } = await aiGenerateText({
+                    model: openai.languageModel(model),
+                    prompt: context,
+                    system:
+                        runtime.character.system ??
+                        settings.SYSTEM_PROMPT ??
+                        undefined,
+                    temperature: temperature,
+                    maxTokens: max_response_length,
+                    frequencyPenalty: frequency_penalty,
+                    presencePenalty: presence_penalty,
+                });
+
+                response = openaiResponse;
+                elizaLogger.debug("Received response from OpenAI model.");
+                break;
+            }
+
             default: {
                 const errorMessage = `Unsupported provider: ${provider}`;
                 elizaLogger.error(errorMessage);
@@ -1004,6 +1035,8 @@ export async function handleProvider(
             return await handleOpenRouter(options);
         case ModelProviderName.OLLAMA:
             return await handleOllama(options);
+        case ModelProviderName.OASIS:
+            return await handleOasis(options);
         default: {
             const errorMessage = `Unsupported provider: ${provider}`;
             elizaLogger.error(errorMessage);
@@ -1217,6 +1250,39 @@ async function handleOllama({
     const ollama = ollamaProvider(model);
     return await aiGenerateObject({
         model: ollama,
+        schema,
+        schemaName,
+        schemaDescription,
+        mode,
+        ...modelOptions,
+    });
+}
+
+/**
+ * Handles object generation for OpenAI.
+ *
+ * @param {ProviderOptions} options - Options specific to OpenAI.
+ * @returns {Promise<GenerateObjectResult<unknown>>} - A promise that resolves to generated objects.
+ */
+async function handleOasis({
+    model,
+    apiKey,
+    schema,
+    schemaName,
+    schemaDescription,
+    mode,
+    modelOptions,
+}: ProviderOptions): Promise<GenerateObjectResult<unknown>> {
+    const openai = createOpenAI({
+        apiKey,
+        baseURL: models.oasis.endpoint,
+        headers: {
+            Authorization: `api-key ${apiKey}`,
+        },
+        compatibility: "compatible",
+    });
+    return await aiGenerateObject({
+        model: openai.languageModel(model),
         schema,
         schemaName,
         schemaDescription,

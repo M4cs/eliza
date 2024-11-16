@@ -156,6 +156,11 @@ export function getTokenForProvider(
                 character.settings?.secrets?.HEURIST_API_KEY ||
                 settings.HEURIST_API_KEY
             );
+        case ModelProviderName.OASIS:
+            return (
+                character.settings?.secrets?.OASIS_API_KEY ||
+                settings.OASIS_API_KEY
+            );
     }
 }
 

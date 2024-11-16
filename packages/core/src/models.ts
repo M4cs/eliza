@@ -237,6 +237,23 @@ export const models: Models = {
             [ModelClass.IMAGE]: "PepeXL",
         },
     },
+    [ModelProviderName.OASIS]: {
+        endpoint: "https://api.oasis.ai/v1",
+        settings: {
+            stop: [],
+            maxInputTokens: 128000,
+            maxOutputTokens: 8192,
+            frequency_penalty: 0.0,
+            presence_penalty: 0.0,
+            temperature: 0.6,
+        },
+        model: {
+            [ModelClass.SMALL]: "llama8b",
+            [ModelClass.MEDIUM]: "llama8b",
+            [ModelClass.LARGE]: "llama8b",
+            [ModelClass.EMBEDDING]: "text-embedding-3-small",
+        },
+    },
 };
 
 export function getModel(provider: ModelProviderName, type: ModelClass) {
