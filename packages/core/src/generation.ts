@@ -357,19 +357,17 @@ export async function generateText({
 
             case ModelProviderName.OASIS: {
                 elizaLogger.debug("Initializing Oasis model.");
-                elizaLogger.log("apiKey", apiKey);
-                elizaLogger.log("endpoint", endpoint);
-                const openai = createOpenAI({
+                const oasis = createOpenAI({
                     apiKey,
                     baseURL: endpoint,
                     headers: {
-                        Authorization: `api-key ${apiKey}`,
+                        Authorization: `${apiKey}`,
                     },
                     compatibility: "compatible",
                 });
 
-                const { text: openaiResponse } = await aiGenerateText({
-                    model: openai.languageModel(model),
+                const { text: oasisResponse } = await aiGenerateText({
+                    model: oasis.languageModel(model),
                     prompt: context,
                     system:
                         runtime.character.system ??
@@ -381,7 +379,7 @@ export async function generateText({
                     presencePenalty: presence_penalty,
                 });
 
-                response = openaiResponse;
+                response = oasisResponse;
                 elizaLogger.debug("Received response from OpenAI model.");
                 break;
             }
@@ -1273,16 +1271,16 @@ async function handleOasis({
     mode,
     modelOptions,
 }: ProviderOptions): Promise<GenerateObjectResult<unknown>> {
-    const openai = createOpenAI({
+    const oasis = createOpenAI({
         apiKey,
         baseURL: models.oasis.endpoint,
         headers: {
-            Authorization: `api-key ${apiKey}`,
+            Authorization: `${apiKey}`,
         },
         compatibility: "compatible",
     });
     return await aiGenerateObject({
-        model: openai.languageModel(model),
+        model: oasis.languageModel(model),
         schema,
         schemaName,
         schemaDescription,

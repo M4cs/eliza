@@ -116,27 +116,26 @@ export class ClientBase extends EventEmitter {
         this.blueskyAgent = new AtpAgent({
             service: "https://bsky.social",
         });
-        this.blueskyAgent
-            .login({
+        (async () => {
+            await this.blueskyAgent.login({
                 identifier: this.runtime.getSetting("BSKY_USERNAME"),
                 password: this.runtime.getSetting("BSKY_PASSWORD"),
-            })
-            .then(() => {
-                this.blueskyAgent
-                    .getProfile({
-                        actor: this.runtime.getSetting("BSKY_USERNAME"),
-                    })
-                    .then((profile) => {
-                        this.bskyUserDid = profile.data.did;
-                    });
-                this.directions =
-                    "- " +
-                    this.runtime.character.style.all.join("\n- ") +
-                    "- " +
-                    this.runtime.character.style.post.join("\n- ");
-
-                this.onReady();
             });
+            const { data } = await this.blueskyAgent.getProfile({
+                actor: this.runtime.getSetting("BSKY_USERNAME"),
+            });
+            this.bskyUserDid = data.did;
+
+            this.directions =
+                "- " +
+                this.runtime.character.style.all.join("\n- ") +
+                "- " +
+                this.runtime.character.style.post.join("\n- ");
+
+            await this.populateTimeline();
+
+            this.onReady();
+        })();
     }
 
     async fetchHomeTimeline(count: number): Promise<FeedViewPost[]> {
@@ -244,10 +243,14 @@ export class ClientBase extends EventEmitter {
             }
         }
 
+        elizaLogger.log(this.bskyUserDid);
+
         const { data } = await this.blueskyAgent.getAuthorFeed({
             actor: this.bskyUserDid,
             limit: 20,
         });
+
+        elizaLogger.log("Got author feed", data);
 
         const { feed: postsArray } = data;
 
