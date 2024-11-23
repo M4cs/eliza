@@ -39,6 +39,7 @@ case "$1" in
             "client-discord"
             "client-telegram"
             "client-twitter"
+            "client-warpcast"
             "core"
             "plugin-bootstrap"
             "plugin-image-generation"
