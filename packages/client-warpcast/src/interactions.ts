@@ -113,7 +113,7 @@ export class WarpcastInteractionClient {
             const { notifications } =
                 await this.client.neynarClient.fetchAllNotifications({
                     fid: this.client.profile.fid,
-                    type: ["replies"],
+                    type: ["replies", "mentions"],
                 });
 
             const uniqueCastCandidates = [...new Set(notifications)];
