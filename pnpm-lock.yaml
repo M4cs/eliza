@@ -610,8 +610,8 @@ importers:
         specifier: workspace:*
         version: link:../core
       agent-twitter-client:
-        specifier: 0.0.14
-        version: 0.0.14
+        specifier: 0.0.13
+        version: 0.0.13
       glob:
         specifier: 11.0.0
         version: 11.0.0
@@ -689,10 +689,8 @@ importers:
       ai:
         specifier: ^3.4.23
         version: 3.4.33(openai@4.69.0(encoding@0.1.13)(zod@3.23.8))(react@18.3.1)(sswr@2.1.0(svelte@5.2.7))(svelte@5.2.7)(vue@3.5.13(typescript@5.6.3))(zod@3.23.8)
-        version: 3.4.33(openai@4.69.0(encoding@0.1.13)(zod@3.23.8))(react@18.3.1)(sswr@2.1.0(svelte@5.2.7))(svelte@5.2.7)(vue@3.5.13(typescript@5.6.3))(zod@3.23.8)
       anthropic-vertex-ai:
         specifier: ^1.0.0
-        version: 1.0.2(encoding@0.1.13)(zod@3.23.8)
         version: 1.0.2(encoding@0.1.13)(zod@3.23.8)
       fastembed:
         specifier: ^1.14.1
@@ -906,33 +904,14 @@ importers:
         version: 1.0.5(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       onnxruntime-node:
         specifier: ^1.20.0
-        version: 1.20.0
+        version: 1.20.1
       whatwg-url:
         specifier: 7.1.0
         version: 7.1.0
     devDependencies:
       tsup:
         specifier: ^8.3.5
-        version: 8.3.5(@swc/core@1.9.2(@swc/helpers@0.5.15))(jiti@2.4.0)(postcss@8.4.49)(typescript@5.6.3)(yaml@2.6.1)
-
-  packages/plugin-coinbase:
-    dependencies:
-      '@ai16z/eliza':
-        specifier: ^0.1.3
-        version: 0.1.3(@google-cloud/vertexai@1.9.0(encoding@0.1.13))(encoding@0.1.13)(react@18.3.1)(sswr@2.1.0(svelte@5.2.4))(svelte@5.2.4)
-      coinbase-api:
-        specifier: ^1.0.5
-        version: 1.0.5(bufferutil@4.0.8)(utf-8-validate@5.0.10)
-      onnxruntime-node:
-        specifier: ^1.20.0
-        version: 1.20.0
-      whatwg-url:
-        specifier: 7.1.0
-        version: 7.1.0
-    devDependencies:
-      tsup:
-        specifier: ^8.3.5
-        version: 8.3.5(@swc/core@1.9.2(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.6.3)(yaml@2.6.1)
+        version: 8.3.5(@swc/core@1.9.3(@swc/helpers@0.5.15))(jiti@2.4.0)(postcss@8.4.49)(typescript@5.6.3)(yaml@2.6.1)
 
   packages/plugin-image-generation:
     dependencies:
@@ -2826,7 +2805,6 @@ packages:
     resolution: {integrity: sha512-hArn9FF5ZYi1IkxdJEVnJi+OxlwLV0NJYWpKXsmNOojtGtAZHxmsELA+MZlu2KW1F/K1/nt7lFOfcMXNYweq9w==}
     version: 0.17.0
     engines: {node: '>=16.11.0'}
-    deprecated: This version uses deprecated encryption modes. Please use a newer version.
 
   '@discordjs/ws@1.1.1':
     resolution: {integrity: sha512-PZ+vLpxGCRtmr2RMkqh8Zp+BenUaJqlS6xhgWKEZcgC/vfHLEzpHtKkB0sl3nZWpwtcKk6YWy+pU3okL2I97FA==}
@@ -6241,9 +6219,6 @@ packages:
 
   agent-twitter-client@0.0.13:
     resolution: {integrity: sha512-xIVvrMKWe9VfZDlmGwO9hEd0Kav74FUT4euPZV8XiTqPv6D5gOd5PE0KkkBHPKSupOZuHf8BvQuhEwa/5Ac6hg==}
-
-  agent-twitter-client@0.0.14:
-    resolution: {integrity: sha512-GYTyLRqiN3yaJTSSiPB1J5kL0RXh10UvsN/Xn2HhegBnpQlgtLkMEQnDKfR+ZNBiLBhG2QBpm/6GrhAxdF4a5g==}
 
   agentkeepalive@4.5.0:
     resolution: {integrity: sha512-5GG/5IbQQpC9FpkRGsSvZI5QYeSCzlJHdpBQntCsuTOxhKD8lqKhrleg2Yi7yvMIf82Ycmmqln9U8V9qwEiJew==}
@@ -10039,13 +10014,10 @@ packages:
     resolution: {integrity: sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==}
     engines: {'0': node >= 0.2.0}
 
-<<<<<<< HEAD
   jsonpointer@5.0.1:
     resolution: {integrity: sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ==}
     engines: {node: '>=0.10.0'}
 
-=======
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
   jsonwebtoken@9.0.2:
     resolution: {integrity: sha512-PRp66vJ865SSqOlgqS8hujT5U4AOgMfhrwYIuIhfKaoSCZcirrmASQr8CX7cUg+RMih+hgznrjp99o+W4pJLHQ==}
     engines: {node: '>=12', npm: '>=6'}
@@ -10307,24 +10279,18 @@ packages:
   lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
 
-<<<<<<< HEAD
   lodash.deburr@4.1.0:
     resolution: {integrity: sha512-m/M1U1f3ddMCs6Hq2tAsYThTBDaAKFDX3dwDo97GEYzamXi9SqUpjWi/Rrj/gf3X2n8ktwgZrlP1z6E3v/IExQ==}
 
-=======
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
   lodash.includes@4.3.0:
     resolution: {integrity: sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==}
 
   lodash.isboolean@3.0.3:
     resolution: {integrity: sha512-Bz5mupy2SVbPHURB98VAcw+aHh4vRV5IPNhILUCsOzRmsTmSQ17jIuqopAentWoehktxGd9e/hbIXq980/1QJg==}
 
-<<<<<<< HEAD
   lodash.isfunction@3.0.9:
     resolution: {integrity: sha512-AirXNj15uRIMMPihnkInB4i3NHeb4iBtNg9WRWuK2o31S+ePwwNmDPaTL3o7dTJ+VXNZim7rFs4rxN4YU1oUJw==}
 
-=======
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
   lodash.isinteger@4.0.4:
     resolution: {integrity: sha512-DBwtEWN2caHQ9/imiNeEA5ys1JoRtRfY3d7V9wkqtbycnAmTvRRmbHKDV4a0EYc678/dia0jrte4tjYwVBaZUA==}
 
@@ -10340,24 +10306,18 @@ packages:
   lodash.isstring@4.0.1:
     resolution: {integrity: sha512-0wJxfxH1wgO3GrbuP+dTTk7op+6L41QCXbGINEmD+ny/G/eCqGzxyCsh7159S+mgDDcoarnBw6PC1PS5+wUGgw==}
 
-<<<<<<< HEAD
   lodash.kebabcase@4.1.1:
     resolution: {integrity: sha512-N8XRTIMMqqDgSy4VLKPnJ/+hpGZN+PHQiJnSenYqPaVV/NCqEogTnAdZLQiGKhxX+JCs8waWq2t1XHWKOmlY8g==}
 
-=======
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
   lodash.memoize@4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
 
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
-<<<<<<< HEAD
   lodash.mergewith@4.6.2:
     resolution: {integrity: sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==}
 
-=======
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
   lodash.once@4.1.1:
     resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
 
@@ -14019,11 +13979,13 @@ packages:
 
   tldts-core@6.1.63:
     resolution: {integrity: sha512-H1XCt54xY+QPbwhTgmxLkepX0MVHu3USfMmejiCOdkMbRcP22Pn2FVF127r/GWXVDmXTRezyF3Ckvhn4Fs6j7Q==}
-  tldts-core@6.1.63:
-    resolution: {integrity: sha512-H1XCt54xY+QPbwhTgmxLkepX0MVHu3USfMmejiCOdkMbRcP22Pn2FVF127r/GWXVDmXTRezyF3Ckvhn4Fs6j7Q==}
 
   tldts-experimental@6.1.63:
     resolution: {integrity: sha512-Xqxv4UvuTwC/sslspSbkw/52vvYCeZdEJwnv7VFlQEfYvK8fNuIpz5hoOvO7XuzfjqexMRRnVDYUyjqesTYESg==}
+
+  tldts@6.1.63:
+    resolution: {integrity: sha512-YWwhsjyn9sB/1rOkSRYxvkN/wl5LFM1QDv6F2pVR+pb/jFne4EOBxHfkKVWvDIBEAw9iGOwwubHtQTm0WRT5sQ==}
+    hasBin: true
 
   tmp@0.0.33:
     resolution: {integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==}
@@ -14220,9 +14182,6 @@ packages:
 
   tweetnacl@0.14.5:
     resolution: {integrity: sha512-KXXFFdAbFXY4geFIwoyNK+f5Z1b7swfXABfL7HXCmoIWMKU3dmS26672A4EeQtDzLKy7SXmfBu51JolvEKwtGA==}
-
-  twitter-api-v2@1.18.2:
-    resolution: {integrity: sha512-ggImmoAeVgETYqrWeZy+nWnDpwgTP+IvFEc03Pitt1HcgMX+Yw17rP38Fb5FFTinuyNvS07EPtAfZ184uIyB0A==}
 
   tx2@1.0.5:
     resolution: {integrity: sha512-sJ24w0y03Md/bxzK4FU8J8JveYYUbSs2FViLJ2D/8bytSiyPRbuE3DyL/9UKYXTZlV3yXq0L8GLlhobTnekCVg==}
@@ -15200,11 +15159,7 @@ snapshots:
     transitivePeerDependencies:
       - zod
 
-<<<<<<< HEAD
   '@ai16z/eliza@0.1.3(@google-cloud/vertexai@1.9.0(encoding@0.1.13))(encoding@0.1.13)(react@18.3.1)(sswr@2.1.0(svelte@5.2.7))(svelte@5.2.7)':
-=======
-  '@ai16z/eliza@0.1.3(@google-cloud/vertexai@1.9.0(encoding@0.1.13))(encoding@0.1.13)(react@18.3.1)(sswr@2.1.0(svelte@5.2.4))(svelte@5.2.4)':
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
     dependencies:
       '@ai-sdk/anthropic': 0.0.53(zod@3.23.8)
       '@ai-sdk/google': 0.0.55(zod@3.23.8)
@@ -15213,13 +15168,8 @@ snapshots:
       '@ai-sdk/openai': 1.0.0-canary.3(zod@3.23.8)
       '@anthropic-ai/sdk': 0.30.1(encoding@0.1.13)
       '@types/uuid': 10.0.0
-<<<<<<< HEAD
       ai: 3.4.33(openai@4.69.0(encoding@0.1.13)(zod@3.23.8))(react@18.3.1)(sswr@2.1.0(svelte@5.2.7))(svelte@5.2.7)(vue@3.5.13(typescript@5.6.3))(zod@3.23.8)
       anthropic-vertex-ai: 1.0.2(encoding@0.1.13)(zod@3.23.8)
-=======
-      ai: 3.4.33(openai@4.69.0(encoding@0.1.13)(zod@3.23.8))(react@18.3.1)(sswr@2.1.0(svelte@5.2.4))(svelte@5.2.4)(vue@3.5.13(typescript@5.6.3))(zod@3.23.8)
-      anthropic-vertex-ai: 1.0.0(encoding@0.1.13)(zod@3.23.8)
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
       fastembed: 1.14.1
       gaxios: 6.7.1(encoding@0.1.13)
       glob: 11.0.0
@@ -21964,18 +21914,6 @@ snapshots:
       tough-cookie: 4.1.4
       tslib: 2.8.0
 
-  agent-twitter-client@0.0.14:
-    dependencies:
-      '@sinclair/typebox': 0.32.35
-      agent-twitter-client: 0.0.13
-      headers-polyfill: 3.3.0
-      json-stable-stringify: 1.1.1
-      otpauth: 9.3.5
-      set-cookie-parser: 2.7.1
-      tough-cookie: 4.1.4
-      tslib: 2.8.0
-      twitter-api-v2: 1.18.2
-
   agentkeepalive@4.5.0:
     dependencies:
       humanize-ms: 1.2.1
@@ -26182,7 +26120,7 @@ snapshots:
 
   jest-diff@29.7.0:
     dependencies:
-      chalk: 4.1.2
+      chalk: 4.1.0
       diff-sequences: 29.6.3
       jest-get-type: 29.6.3
       pretty-format: 29.7.0
@@ -26546,11 +26484,8 @@ snapshots:
 
   jsonparse@1.3.1: {}
 
-<<<<<<< HEAD
   jsonpointer@5.0.1: {}
 
-=======
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
   jsonwebtoken@9.0.2:
     dependencies:
       jws: 3.2.2
@@ -26913,20 +26848,14 @@ snapshots:
 
   lodash.debounce@4.0.8: {}
 
-<<<<<<< HEAD
   lodash.deburr@4.1.0: {}
 
-=======
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
   lodash.includes@4.3.0: {}
 
   lodash.isboolean@3.0.3: {}
 
-<<<<<<< HEAD
   lodash.isfunction@3.0.9: {}
 
-=======
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
   lodash.isinteger@4.0.4: {}
 
   lodash.ismatch@4.4.0: {}
@@ -26937,20 +26866,14 @@ snapshots:
 
   lodash.isstring@4.0.1: {}
 
-<<<<<<< HEAD
   lodash.kebabcase@4.1.1: {}
 
-=======
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
   lodash.memoize@4.1.2: {}
 
   lodash.merge@4.6.2: {}
 
-<<<<<<< HEAD
   lodash.mergewith@4.6.2: {}
 
-=======
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
   lodash.once@4.1.1: {}
 
   lodash.snakecase@4.1.1: {}
@@ -28244,7 +28167,7 @@ snapshots:
       '@yarnpkg/parsers': 3.0.2
       '@zkochan/js-yaml': 0.0.7
       axios: 1.7.7(debug@4.3.7)
-      chalk: 4.1.2
+      chalk: 4.1.0
       cli-cursor: 3.1.0
       cli-spinners: 2.6.1
       cliui: 8.0.1
@@ -28447,7 +28370,7 @@ snapshots:
   ora@5.3.0:
     dependencies:
       bl: 4.1.0
-      chalk: 4.1.2
+      chalk: 4.1.0
       cli-cursor: 3.1.0
       cli-spinners: 2.6.1
       is-interactive: 1.0.0
@@ -31495,6 +31418,10 @@ snapshots:
     dependencies:
       tldts-core: 6.1.63
 
+  tldts@6.1.63:
+    dependencies:
+      tldts-core: 6.1.63
+
   tmp@0.0.33:
     dependencies:
       os-tmpdir: 1.0.2
@@ -31684,8 +31611,6 @@ snapshots:
   tv4@1.3.0: {}
 
   tweetnacl@0.14.5: {}
-
-  twitter-api-v2@1.18.2: {}
 
   tx2@1.0.5:
     dependencies:

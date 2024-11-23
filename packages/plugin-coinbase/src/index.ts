@@ -1,15 +1,5 @@
-<<<<<<< HEAD
-import {
-    composeContext,
-    elizaLogger,
-    generateObjectV2,
-    ModelClass,
-    Provider,
-} from "@ai16z/eliza";
-=======
 import { CBCommerceClient } from "coinbase-api";
 import { elizaLogger } from "@ai16z/eliza";
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
 import {
     Action,
     HandlerCallback,
@@ -18,50 +8,15 @@ import {
     Plugin,
     State,
 } from "@ai16z/eliza";
-<<<<<<< HEAD
-import { ChargeContent, ChargeSchema, isChargeContent } from "./types";
-import { chargeTemplate, getChargeTemplate } from "./templates";
-
-const url = "https://api.commerce.coinbase.com/charges";
-interface ChargeRequest {
-    name: string;
-    description: string;
-    pricing_type: string;
-=======
 
 export type ChargeParams = {
     buyer_locale?: string;
     cancel_url?: string;
     checkout_id?: string;
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
     local_price: {
         amount: string;
         currency: string;
     };
-<<<<<<< HEAD
-}
-
-export async function createCharge(apiKey: string, params: ChargeRequest) {
-    try {
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CC-Api-Key": apiKey,
-            },
-            body: JSON.stringify(params),
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to create charge: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        return data.data;
-    } catch (error) {
-        console.error("Error creating charge:", error);
-        throw error;
-=======
     metadata?: {
         custom_field?: string;
         custom_field_two?: string;
@@ -87,73 +42,20 @@ export async function createCharge(
         console.log("Charge created successfully:", response);
     } catch (error) {
         console.error("Error creating charge:", error);
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
     }
 }
 
 // Function to fetch all charges
-<<<<<<< HEAD
-export async function getAllCharges(apiKey: string) {
-    try {
-        const response = await fetch(url, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CC-Api-Key": apiKey,
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(
-                `Failed to fetch all charges: ${response.statusText}`
-            );
-        }
-
-        const data = await response.json();
-        return data.data;
-    } catch (error) {
-        console.error("Error fetching charges:", error);
-        throw error;
-=======
 export async function getAllCharges(client: CBCommerceClient) {
     try {
         const response = await client.getAllCharges();
         console.log("Fetched all charges:", response);
     } catch (error) {
         console.error("Error fetching charges:", error);
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
     }
 }
 
 // Function to fetch details of a specific charge
-<<<<<<< HEAD
-export async function getChargeDetails(apiKey: string, chargeId: string) {
-    const getUrl = `${url}${chargeId}`;
-
-    try {
-        const response = await fetch(getUrl, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CC-Api-Key": apiKey,
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(
-                `Failed to fetch charge details: ${response.statusText}`
-            );
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error(
-            `Error fetching charge details for ID ${chargeId}:`,
-            error
-        );
-        throw error;
-=======
 export async function getChargeDetails(
     client: CBCommerceClient,
     chargeId: string
@@ -165,7 +67,6 @@ export async function getChargeDetails(
         console.log("Charge details:", response);
     } catch (error) {
         console.error("Error fetching charge details:", error);
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
     }
 }
 
@@ -195,30 +96,6 @@ export const createCoinbaseChargeAction: Action = {
         callback: HandlerCallback
     ) => {
         elizaLogger.log("Composing state for message:", message);
-<<<<<<< HEAD
-        if (!state) {
-            state = (await runtime.composeState(message)) as State;
-        } else {
-            state = await runtime.updateRecentMessageState(state);
-        }
-
-        const context = composeContext({
-            state,
-            template: chargeTemplate,
-        });
-
-        const chargeDetails = await generateObjectV2({
-            runtime,
-            context,
-            modelClass: ModelClass.SMALL,
-            schema: ChargeSchema,
-        });
-        if (!isChargeContent(chargeDetails.object)) {
-            throw new Error("Invalid content");
-        }
-        const charge = chargeDetails.object as ChargeContent;
-        if (!charge || !charge.price || !charge.type) {
-=======
         state = (await runtime.composeState(message)) as State;
 
         const chargeDetails = message.content.data as ChargeParams; // Safely typecast or validate the incoming data
@@ -227,7 +104,6 @@ export const createCoinbaseChargeAction: Action = {
             !chargeDetails.local_price ||
             !chargeDetails.pricing_type
         ) {
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
             callback(
                 {
                     text: "Invalid charge details provided.",
@@ -240,23 +116,6 @@ export const createCoinbaseChargeAction: Action = {
         elizaLogger.log("Charge details received:", chargeDetails);
 
         // Initialize Coinbase Commerce client
-<<<<<<< HEAD
-
-        try {
-            // Create a charge
-            const chargeResponse = await createCharge(
-                runtime.getSetting("COINBASE_COMMERCE_KEY"),
-                {
-                    local_price: {
-                        amount: charge.price.toString(),
-                        currency: charge.currency,
-                    },
-                    pricing_type: charge.type,
-                    name: charge.name,
-                    description: charge.description,
-                }
-            );
-=======
         const commerceClient = new CBCommerceClient({
             apiKey: runtime.getSetting("COINBASE_COMMERCE_KEY"),
         });
@@ -271,7 +130,6 @@ export const createCoinbaseChargeAction: Action = {
                 redirect_url: chargeDetails.redirect_url,
                 metadata: chargeDetails.metadata || {},
             });
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
 
             elizaLogger.log(
                 "Coinbase Commerce charge created:",
@@ -284,11 +142,7 @@ export const createCoinbaseChargeAction: Action = {
                     attachments: [
                         {
                             id: crypto.randomUUID(),
-<<<<<<< HEAD
-                            url: chargeResponse.id,
-=======
                             url: chargeResponse.hosted_url,
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
                             title: "Coinbase Commerce Charge",
                             description: `Charge ID: ${chargeResponse.id}`,
                             text: `Pay here: ${chargeResponse.hosted_url}`,
@@ -316,11 +170,7 @@ export const createCoinbaseChargeAction: Action = {
             {
                 user: "{{user1}}",
                 content: {
-<<<<<<< HEAD
-                    text: "Create a charge for $10.00 USD to Chris for dinner",
-=======
                     text: "Create a charge for $10.00",
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
                     data: {
                         local_price: {
                             amount: "10.00",
@@ -336,11 +186,7 @@ export const createCoinbaseChargeAction: Action = {
             {
                 user: "{{agentName}}",
                 content: {
-<<<<<<< HEAD
-                    text: "Charge created successfully: {{charge.id}} for {{charge.amount}} {{charge.currency}}",
-=======
                     text: "Charge created successfully: https://commerce.coinbase.com/charges/123456",
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
                     action: "CREATE_CHARGE",
                 },
             },
@@ -367,25 +213,12 @@ export const getAllChargesAction: Action = {
         options: any,
         callback: HandlerCallback
     ) => {
-<<<<<<< HEAD
-        try {
-            elizaLogger.log("Composing state for message:", message);
-            if (!state) {
-                state = (await runtime.composeState(message)) as State;
-            } else {
-                state = await runtime.updateRecentMessageState(state);
-            }
-            const charges = await getAllCharges(
-                runtime.getSetting("COINBASE_COMMERCE_KEY")
-            );
-=======
         const commerceClient = new CBCommerceClient({
             apiKey: runtime.getSetting("COINBASE_COMMERCE_KEY"),
         });
 
         try {
             const charges = await commerceClient.getAllCharges();
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
 
             elizaLogger.log("Fetched all charges:", charges);
 
@@ -441,34 +274,9 @@ export const getChargeDetailsAction: Action = {
         options: any,
         callback: HandlerCallback
     ) => {
-<<<<<<< HEAD
-        elizaLogger.log("Composing state for message:", message);
-        if (!state) {
-            state = (await runtime.composeState(message)) as State;
-        } else {
-            state = await runtime.updateRecentMessageState(state);
-        }
-
-        const context = composeContext({
-            state,
-            template: getChargeTemplate,
-        });
-        const chargeDetails = await generateObjectV2({
-            runtime,
-            context,
-            modelClass: ModelClass.SMALL,
-            schema: ChargeSchema,
-        });
-        if (!isChargeContent(chargeDetails.object)) {
-            throw new Error("Invalid content");
-        }
-        const charge = chargeDetails.object as ChargeContent;
-        if (!charge.id) {
-=======
         const { chargeId } = options;
 
         if (!chargeId) {
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
             callback(
                 {
                     text: "Missing charge ID. Please provide a valid charge ID.",
@@ -478,13 +286,6 @@ export const getChargeDetailsAction: Action = {
             return;
         }
 
-<<<<<<< HEAD
-        try {
-            const chargeDetails = await getChargeDetails(
-                runtime.getSetting("COINBASE_COMMERCE_KEY"),
-                charge.id
-            );
-=======
         const commerceClient = new CBCommerceClient({
             apiKey: runtime.getSetting("COINBASE_COMMERCE_KEY"),
         });
@@ -493,26 +294,17 @@ export const getChargeDetailsAction: Action = {
             const chargeDetails = await commerceClient.getCharge({
                 charge_code_or_charge_id: chargeId,
             });
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
 
             elizaLogger.log("Fetched charge details:", chargeDetails);
 
             callback(
                 {
-<<<<<<< HEAD
-                    text: `Successfully fetched charge details for ID: ${charge.id}`,
-=======
                     text: `Successfully fetched charge details for ID: ${chargeId}`,
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
                     attachments: [
                         {
                             id: crypto.randomUUID(),
                             url: chargeDetails.hosted_url,
-<<<<<<< HEAD
-                            title: `Charge Details for ${charge.id}`,
-=======
                             title: `Charge Details for ${chargeId}`,
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
                             description: `Details: ${JSON.stringify(chargeDetails, null, 2)}`,
                             source: "coinbase",
                             text: "",
@@ -523,20 +315,12 @@ export const getChargeDetailsAction: Action = {
             );
         } catch (error) {
             elizaLogger.error(
-<<<<<<< HEAD
-                `Error fetching details for charge ID ${charge.id}:`,
-=======
                 `Error fetching details for charge ID ${chargeId}:`,
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
                 error
             );
             callback(
                 {
-<<<<<<< HEAD
-                    text: `Failed to fetch details for charge ID: ${charge.id}. Please try again.`,
-=======
                     text: `Failed to fetch details for charge ID: ${chargeId}. Please try again.`,
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
                 },
                 []
             );
@@ -553,11 +337,7 @@ export const getChargeDetailsAction: Action = {
             {
                 user: "{{agentName}}",
                 content: {
-<<<<<<< HEAD
-                    text: "Successfully fetched charge details. {{charge.id}} for {{charge.amount}} {{charge.currency}} to {{charge.name}} for {{charge.description}}",
-=======
                     text: "Successfully fetched charge details.",
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
                     action: "GET_CHARGE_DETAILS",
                 },
             },
@@ -565,18 +345,6 @@ export const getChargeDetailsAction: Action = {
     ],
 };
 
-<<<<<<< HEAD
-export const chargeProvider: Provider = {
-    get: async (runtime: IAgentRuntime, message: Memory) => {
-        const charges = await getAllCharges(
-            runtime.getSetting("COINBASE_COMMERCE_KEY")
-        );
-        return charges.data;
-    },
-};
-
-=======
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
 export const coinbaseCommercePlugin: Plugin = {
     name: "coinbaseCommerce",
     description:
@@ -587,9 +355,5 @@ export const coinbaseCommercePlugin: Plugin = {
         getChargeDetailsAction,
     ],
     evaluators: [],
-<<<<<<< HEAD
-    providers: [chargeProvider],
-=======
     providers: [],
->>>>>>> f60c5360 (Implement Coinbase Commerce Provider)
 };
