@@ -26,7 +26,7 @@ export const WarpcastClientInterface: Client = {
 
         await manager.client.init();
 
-        await manager.post.start();
+        await manager.post.start(true);
 
         await manager.interaction.start();
 

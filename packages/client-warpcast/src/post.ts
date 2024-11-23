@@ -25,7 +25,7 @@ About {{agentName}} (@{{warpcastUserName}}):
 
 {{characterPostExamples}}
 
-# Task: Generate a post in the voice and style of {{agentName}}, aka @{{twitterUserName}}
+# Task: Generate a post in the voice and style of {{agentName}}, aka @{{warpcastUserName}}
 Write a single sentence post that is {{adjective}} about {{topic}} (without mentioning {{topic}} directly), from the perspective of {{agentName}}. Try to write something totally different than previous posts. Do not add commentary or acknowledge this request, just write the post.
 Your response should not contain any questions. Brief, concise statements only. No emojis. Use \\n\\n (double spaces) between statements.`;
 const MAX_CAST_LENGTH = 280;
@@ -93,6 +93,8 @@ export class WarpcastPostClient {
             setTimeout(() => {
                 generateNewCastLoop(); // Set up next iteration
             }, delay);
+
+            elizaLogger.log(`Next cast scheduled in ${randomMinutes} minutes`);
         };
 
         if (postImmediately) {
